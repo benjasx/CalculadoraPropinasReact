@@ -11,16 +11,21 @@ export default function useOrder() {
         orderitem.id === item.id
           ? { ...orderitem, quantity: orderitem.quantity + 1 }
           : orderitem
-      )
-      setOrder(updateOrder)
+      );
+      setOrder(updateOrder);
     } else {
       const newItem: OrderItem = { ...item, quantity: 1 };
       setOrder([...order, newItem]);
     }
   };
 
+  const removeItem = (id: MenuItems["id"]) => {
+    setOrder(order.filter((item) => item.id !== id));
+  };
+
   return {
     order,
     addItem,
+    removeItem,
   };
 }
